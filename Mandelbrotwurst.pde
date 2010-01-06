@@ -39,6 +39,8 @@ void setup() {
   size(image_width, image_height);
   background(255, 255, 255);
   doDraw(center_x, center_y, increment);
+
+//  FractalCalc fa = new FractalCalc(600, 600, 2);
 }
  
  
@@ -50,7 +52,7 @@ double i_factor = (max_i - min_i) / (image_height - 1);
 // increase iterations for a wider range of color and detail
 // this increases the processing time per-zoom by a very
 // large factor. 
-int max_iterations = 1000, colour = 0;
+int max_iterations = 1500, colour = 0;
 
 // variables used for mandelbrot calculations
 double c_i, c_r, z_r, z_i, is_inside = 0;
