@@ -1,18 +1,17 @@
-/**
- * Mandelbrot Generator
+/*
+ * Mandelbrot Explorer 
  * 
- * Jeff Aigner 2009. 
+ * Jeff Aigner 2009-2010. 
  * TODO:
  * Replace double with BigDecimal for arbitrary precision
  * Refactor into classes mimicking C++ code
  * Ensure proper scaling for non-square viewports
+ * Possibly re-add video making feature
  *
  */
  
 import processing.video.*;
 import java.math.*;
- 
-MovieMaker mm;
  
 // height and width
 int image_width = 600;
@@ -39,7 +38,6 @@ void setup() {
   // size and dark grey background
   size(image_width, image_height);
   background(255, 255, 255);
-//  mm = new MovieMaker(this, image_width, image_height, "mandelbrot.mov", 30, MovieMaker.ANIMATION, MovieMaker.LOSSLESS);
   doDraw(center_x, center_y, increment);
 }
  
@@ -50,10 +48,12 @@ double i_factor = (max_i - min_i) / (image_height - 1);
  
 // max number of iterations per pixel
 int max_iterations = 1000, colour = 0;
- 
+
+// variables used for mandelbrot calculations
 double c_i, c_r, z_r, z_i, is_inside = 0;
  
-
+// debugging function for showing mouse coordinates
+// and the complex numbers that they map to
 void showCoords() {
   System.out.println("Mouse X: " + mouseX);
   System.out.println("Mouse Y: " + mouseY);
@@ -77,8 +77,8 @@ void showCoords() {
   
 }
 
+// zoom in on mouse and redraw
 void mouseClicked() {
-
   min_r = center_x - increment;
   max_r = center_x + increment;
   
@@ -96,11 +96,18 @@ void mouseClicked() {
   center_x = new_x;
   center_y = new_y;
 }
- 
+
+// currently empty because draw
+// is controlled by clicking
 void draw() {
   
 } 
- 
+
+// update the screen, function works like this:
+// cx: real part of complex number
+// cy: imaginary part of complex number
+// inc: increment to use from complex number to
+//      the edges of the screen
 void doDraw(double cx, double cy, double inc) {
   if(drawing == false) {
     drawing = true;
@@ -157,9 +164,14 @@ void doDraw(double cx, double cy, double inc) {
         pix[ x ][ y ] = colour; // store pixel info for later coloring / drawing
       } 
     }
+
+	// iterate over our set of pixels
+	// and color / draw them to screen
     for(int y = 0; y < image_height; ++y) {
       for(int x = 0; x < image_width; ++x) {
         int col = pix[ x ][ y ];
+
+		// color normalizer
         stroke((col / 3 * 2) % 255, ( col / 3 ) * 255 / max_value, col * 255 / max_value );
         point(x, y);
       }
