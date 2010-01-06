@@ -34,7 +34,7 @@ public class Cruncher extends Thread {
 		for(int x = this.x_start; x < this.x_end; x++) {
 			for(int y = 0; y < height; y++) {
 				synchronized(this) {
-					Cruncher.screen[x][y] = x+y;
+					Cruncher.screen[x][y] = x;
 				}
 			}
 		}

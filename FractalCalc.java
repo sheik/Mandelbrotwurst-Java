@@ -1,20 +1,15 @@
 import java.math.*;
-import java.util.concurrent.Semaphore;
 
-
-class FractalCalc {
+public class FractalCalc<Algo> {
 	// height and width of viewing
 	// box in pixels
 	private int image_width, image_height;
-
-	// boundaries of the screen 
-	private BigDecimal min_r, max_r, min_i, max_i;
 
 	// distance from center to sides of screen
 	private BigDecimal increment;
 
 	// center of screen in complex notation
-	private BigDecimal center_x, center_y;
+	private ComplexBigDecimal center;
 
 	private Cruncher[] crunchers;
 

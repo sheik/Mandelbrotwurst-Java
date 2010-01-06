@@ -40,7 +40,7 @@ void setup() {
   background(255, 255, 255);
 //  doDraw(center_x, center_y, increment);
 
-  FractalCalc fa = new FractalCalc(600, 600, 2);
+  FractalCalc<Mandelbrot> fa = new FractalCalc(600, 600, 20);
 
   try {
 	  int[][] testing = fa.draw();
