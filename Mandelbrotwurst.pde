@@ -47,35 +47,14 @@ double r_factor = (max_r - min_r) / (image_width - 1);
 double i_factor = (max_i - min_i) / (image_height - 1);
  
 // max number of iterations per pixel
+// increase iterations for a wider range of color and detail
+// this increases the processing time per-zoom by a very
+// large factor. 
 int max_iterations = 1000, colour = 0;
 
 // variables used for mandelbrot calculations
 double c_i, c_r, z_r, z_i, is_inside = 0;
  
-// debugging function for showing mouse coordinates
-// and the complex numbers that they map to
-void showCoords() {
-  System.out.println("Mouse X: " + mouseX);
-  System.out.println("Mouse Y: " + mouseY);
-  min_r = center_x - increment;
-  max_r = center_x + increment;
-  
-  min_i = center_y - increment;
-  max_i = center_y + increment;
-  
-  r_factor = (max_r - min_r) / (image_width - 1);
-  i_factor = (max_i - min_i) / (image_height - 1);
-  
-
-  double new_x = min_r + mouseX * r_factor;
-  double new_y = max_i - mouseY * i_factor;
-  
-  System.out.println("Current center x: " + center_x);
-  System.out.println("Current center y: " + center_y);
-  System.out.println("New center x: " + new_x);
-  System.out.println("New center y: " + new_y);  
-  
-}
 
 // zoom in on mouse and redraw
 void mouseClicked() {
@@ -97,11 +76,7 @@ void mouseClicked() {
   center_y = new_y;
 }
 
-// currently empty because draw
-// is controlled by clicking
-void draw() {
-  
-} 
+ 
 
 // update the screen, function works like this:
 // cx: real part of complex number
@@ -178,5 +153,34 @@ void doDraw(double cx, double cy, double inc) {
     }
     drawing = false;
   }
+}
+
+// currently empty because draw
+// is controlled by clicking
+void draw() {
+  
+}
+
+// debugging function for showing mouse coordinates
+// and the complex numbers that they map to
+void showCoords() {
+  System.out.println("Mouse X: " + mouseX);
+  System.out.println("Mouse Y: " + mouseY);
+  min_r = center_x - increment;
+  max_r = center_x + increment;
+  
+  min_i = center_y - increment;
+  max_i = center_y + increment;
+  
+  r_factor = (max_r - min_r) / (image_width - 1);
+  i_factor = (max_i - min_i) / (image_height - 1);
+
+  double new_x = min_r + mouseX * r_factor;
+  double new_y = max_i - mouseY * i_factor;
+  
+  System.out.println("Current center x: " + center_x);
+  System.out.println("Current center y: " + center_y);
+  System.out.println("New center x: " + new_x);
+  System.out.println("New center y: " + new_y);  
 }
 
