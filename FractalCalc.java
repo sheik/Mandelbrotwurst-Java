@@ -26,5 +26,16 @@ class FractalCalc {
 		}
 	}
 
+	public int[][] draw() throws InterruptedException {
+		for(int i = 0; i < crunchers.length; i++) {
+			crunchers[i].start();
+		}
+		for(int i = 0; i < crunchers.length; i++) {
+			crunchers[i].join();
+		}
+
+		return Cruncher.getScreen();
+	}
+
 }
 

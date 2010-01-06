@@ -1,6 +1,6 @@
 // number crunching class
 // that will be used for multi-threading
-public class Cruncher implements Runnable {
+public class Cruncher extends Thread {
 
 	// the screen [width][height]
 	// each int will represent the number
@@ -32,7 +32,7 @@ public class Cruncher implements Runnable {
 	// the screen
 	public void run() {
 		for(int x = this.x_start; x < this.x_end; x++) {
-			for(int y = this.y_start; y < this.y_end; y++) {
+			for(int y = 0; y < height; y++) {
 				synchronized(this) {
 					Cruncher.screen[x][y] = x+y;
 				}
@@ -46,6 +46,10 @@ public class Cruncher implements Runnable {
 		screen = new int[width][height];
 		Cruncher.width = width;
 		Cruncher.height = height;
+	}
+
+	public static int[][] getScreen() {
+		return screen;
 	}
 }
 

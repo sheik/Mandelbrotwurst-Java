@@ -38,9 +38,29 @@ void setup() {
   // size and dark grey background
   size(image_width, image_height);
   background(255, 255, 255);
-  doDraw(center_x, center_y, increment);
+//  doDraw(center_x, center_y, increment);
 
-//  FractalCalc fa = new FractalCalc(600, 600, 2);
+  FractalCalc fa = new FractalCalc(600, 600, 2);
+
+  try {
+	  int[][] testing = fa.draw();
+	  // iterate over our set of pixels
+	  // and color / draw them to screen
+	  for(int y = 0; y < image_height; ++y) {
+		  for(int x = 0; x < image_width; ++x) {
+			  int col = testing[ x ][ y ];
+
+			  // color normalizer
+			  max_value = 2000;
+			  min_value = 0;
+
+			  stroke((col / 3 * 2) % 255, ( col / 3 ) * 255 / max_value, col * 255 / max_value );
+			  point(x, y);
+		  }
+	  }
+  } catch(InterruptedException e) {
+	  System.out.println("Something b0rked");
+  }
 }
  
  
